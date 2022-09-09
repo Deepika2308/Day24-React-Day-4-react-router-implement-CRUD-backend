@@ -68,13 +68,16 @@ app.delete("/deleteUser/:id", async(req,res) => {
 })
 //Delete user ends
 
-
-
 //get user profile from db starts
 app.get("/getProfile/:id", async(req,res) => {
     let {id}= req.params;
     let result = await client.db("day24").collection("profiles").findOne({_id:id});
-    res.send(result);
+    if(result){
+        res.send(result);
+    }
+    else{
+        res.send("Could not fetch the data!!");
+    }
 })
 //get user profile gfrom db endds
 
